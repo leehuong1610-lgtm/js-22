@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đại Việt Kỳ Nhân - 3D Perspective</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Playfair+Display+SC:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000000;
+            overflow: hidden; 
+            font-family: 'EB Garamond', serif; 
+            width: 100%;
+            height: 100vh;
+        }
+
+        .drum-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('image/trong-dong.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.2; 
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px; 
+            z-index: 2; 
+        }
+
+        .slider-wrap {
+            position: relative;
+            width: 180px; 
+            height: 260px;
+            transform-style: preserve-3d;
+            top: -100px; 
+        }
+        .slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            animation: run 45s linear infinite;
+            z-index: 2;
+        }
+        .card {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(480px);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 1);
+            transition: 0.5s ease;
+            -webkit-box-reflect: below(15px) linear-gradient(transparent, transparent, rgba(0,0,0,0.2));
+        }
+
+        .card-center {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            z-index: 1;
+            
+            opacity: 0.9;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) sepia(0.1);
+        }
+        
+        h1 {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffd700;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 3px 3px 2px black;
+            z-index: 10;
+        }
+        .sub-title {
+            white-space: nowrap;
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            z-index: 10;
+        }
+        
+        @keyframes run {
+            from {
+                transform: rotateX(-15deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(-15deg) rotateY(-360deg);
+            }
+        }
+
+        .floor {
+            position: absolute;
+            width: 200vw;
+            height: 200vw;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+            transform: translate(-50%, -50%) rotateX(90deg);
+            top: 85%;
+            left: 50%;
+            z-index: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                perspective: 1100px; 
+            }
+            .card { 
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(400px); 
+            }
+            h1 { 
+                font-size: 40px; 
+                bottom: 50px; 
+            }
+            .sub-title { 
+                bottom: 20px; 
+                font-size: 22px; 
+            }
+        }
+
+        @media (max-width: 992px) {
+            .slider-wrap { 
+                width: 150px; 
+                height: 220px; 
+                top: -80px; 
+            }
+            .card { 
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(320px); 
+            }
+            .card-center { 
+                width: 200px; 
+                height: 200px; 
+            }
+            h1 { 
+                font-size: 34px; 
+            }
+            .sub-title { 
+                font-size: 20px; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { 
+                perspective: 900px;
+            }
+            .slider-wrap {
+                width: 120px; 
+                height: 180px; 
+                top: -70px; 
+            }
+            .card { 
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(280px); 
+            }
+            .card-center { 
+                width: 180px; 
+                height: 180px; 
+            }
+            h1 { 
+                font-size: 28px; 
+                bottom: 85px; 
+                letter-spacing: 3px; 
+            }
+            .sub-title { 
+                font-size: 18px; 
+                bottom: 55px; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container { 
+                perspective: 800px; 
+            }
+            .slider-wrap { 
+                width: 100px; 
+                height: 150px; 
+                top: -100px; 
+            }
+            .card { 
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px); 
+                border-width: 1.5px;
+            }
+            .card-center { 
+                width: 170px; 
+                height: 170px; 
+            }
+            h1 { 
+                font-size: 24px; 
+                bottom: 12%; 
+                width: 90%;
+                line-height: 1.2;
+            }
+            .sub-title { 
+                font-size: 16px; 
+                bottom: 8%; 
+                width: 85%;
+                text-align: center;
+            }
+            
+        }
+
+        @media (max-width: 360px) {
+            .container { 
+                perspective: 700px; 
+            }
+            .slider-wrap { 
+                width: 85px; 
+                height: 125px; 
+                top: -120px; 
+            }
+            .card { 
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(155px);
+            }
+            .card-center { 
+                width: 120px; 
+                height: 120px; 
+            }
+            h1 { 
+                font-size: 19px; 
+                bottom: 16%; 
+            }
+            .sub-title { 
+                font-size: 13px; 
+                bottom: 12%; 
+            }
+        }
+
+        @media (max-height: 500px) {
+            .slider-wrap { 
+                top: -20px; 
+                transform: scale(0.6); 
+            }
+            h1 { 
+                bottom: 15px; 
+                font-size: 22px; 
+            }
+            .sub-title { 
+                display: none; 
+            }
+            .card-center { 
+                display: none; 
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="drum-overlay"></div>
+<div class="floor"></div>
+
+<div class="container">
+    <div class="slider-wrap">
+        <div class="card-center">
+            <img src="image/vietnam_map_split_new_01_07.svg" alt="Trống Đồng">
+        </div>
+        
+        <div class="slider" style="--quantity: 7;">
+            <div class="card" style="--position: 1;">
+                <img src="image/Mai-Thuc-Loan.jpg">
+            </div>
+            <div class="card" style="--position: 2;">
+                <img src="image/Ngo-Quyen.jpg">
+            </div>
+            <div class="card" style="--position: 3;">
+                <img src="image/Dinh-Bo-Linh.jpg">
+            </div>
+            <div class="card" style="--position: 4;">
+                <img src="image/Le-Hoan.jpg">
+            </div>
+            <div class="card" style="--position: 5;">
+                <img src="image/Ly-Thuong-Kiet.jpg">
+            </div>
+            <div class="card" style="--position: 6;">
+                <img src="image/Tran-Thu-Do.jpg">
+            </div>
+            <div class="card" style="--position: 7;">
+                <img src="image/Tran-Hung-Dao.jpg">
+            </div>
+        </div>
+    </div>
+    <h1>Đại Việt Kỳ Nhân</h1>
+    <div class="sub-title">Hào khí ngàn năm soi rạng sử vàng</div>
+</div>
+
+</body>
+</html>
