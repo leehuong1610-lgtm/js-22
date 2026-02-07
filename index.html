@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đại Việt Kỳ Nhân - 3D Perspective</title>
+    <title>Đại Việt Kỳ Nhân</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Playfair+Display+SC:wght@400;700;900&display=swap');
 
@@ -82,7 +83,6 @@
             transform: translate(-50%, -50%);
             overflow: hidden;
             z-index: 1;
-            
             opacity: 0.9;
         }
         img {
@@ -109,17 +109,18 @@
             z-index: 10;
         }
         .sub-title {
-            white-space: nowrap;
             position: absolute;
             bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            width: 100%;
+            text-align: center;
             color: #ffffff;
             font-family: 'Dancing Script', cursive;
             font-size: 24px;
             letter-spacing: 1px;
             opacity: 0.8;
             z-index: 10;
+            padding: 0 10px;
         }
         
         @keyframes run {
@@ -142,8 +143,9 @@
             z-index: 0;
         }
 
+
         @media (max-width: 1200px) {
-            .container {
+            .container { 
                 perspective: 1100px; 
             }
             .card { 
@@ -161,7 +163,7 @@
 
         @media (max-width: 992px) {
             .slider-wrap { 
-                width: 150px; 
+                width: 150px;
                 height: 220px; 
                 top: -80px; 
             }
@@ -175,31 +177,27 @@
             h1 { 
                 font-size: 34px; 
             }
-            .sub-title { 
-                font-size: 20px; 
-            }
         }
 
         @media (max-width: 768px) {
             .container { 
-                perspective: 900px;
+                perspective: 1000px; 
             }
-            .slider-wrap {
+            .slider-wrap { 
                 width: 120px; 
                 height: 180px; 
                 top: -70px; 
             }
             .card { 
-                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(280px); 
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(250px); 
             }
             .card-center { 
-                width: 180px; 
-                height: 180px; 
+                width: 170px; 
+                height: 170px; 
             }
             h1 { 
                 font-size: 28px; 
                 bottom: 85px; 
-                letter-spacing: 3px; 
             }
             .sub-title { 
                 font-size: 18px; 
@@ -212,73 +210,53 @@
                 perspective: 800px; 
             }
             .slider-wrap { 
-                width: 100px; 
-                height: 150px; 
-                top: -100px; 
+                width: 90px; 
+                height: 135px; 
+                top: -110px; 
             }
             .card { 
-                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px); 
-                border-width: 1.5px;
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(160px); 
+                border-width: 1px;
             }
             .card-center { 
-                width: 170px; 
-                height: 170px; 
+                width: 130px; 
+                height: 130px; 
             }
             h1 { 
-                font-size: 24px; 
-                bottom: 12%; 
-                width: 90%;
-                line-height: 1.2;
+                font-size: 22px; 
+                bottom: 15%; 
+                padding: 0 10px;
+                letter-spacing: 2px;
             }
             .sub-title { 
-                font-size: 16px; 
-                bottom: 8%; 
-                width: 85%;
-                text-align: center;
+                font-size: 15px; 
+                bottom: 10%; 
+                width: 100%;
             }
-            
         }
-
         @media (max-width: 360px) {
             .container { 
                 perspective: 700px; 
             }
             .slider-wrap { 
-                width: 85px; 
-                height: 125px; 
+                width: 75px; 
+                height: 110px; 
                 top: -120px; 
             }
             .card { 
-                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(155px);
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(135px);
             }
             .card-center { 
-                width: 120px; 
-                height: 120px; 
+                width: 110px; 
+                height: 110px; 
             }
             h1 { 
-                font-size: 19px; 
+                font-size: 18px; 
                 bottom: 16%; 
             }
             .sub-title { 
-                font-size: 13px; 
+                font-size: 12px; 
                 bottom: 12%; 
-            }
-        }
-
-        @media (max-height: 500px) {
-            .slider-wrap { 
-                top: -20px; 
-                transform: scale(0.6); 
-            }
-            h1 { 
-                bottom: 15px; 
-                font-size: 22px; 
-            }
-            .sub-title { 
-                display: none; 
-            }
-            .card-center { 
-                display: none; 
             }
         }
     </style>
